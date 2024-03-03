@@ -1,0 +1,4 @@
+If it's not said other, the data are manually uploaded to azure blob storage.
+
+kidney_stone.csv
+https://www.kaggle.com/code/tumpanjawat/kidney-stone-eda-prediction-7-model-2-nn
