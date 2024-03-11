@@ -1,0 +1,11 @@
+.ipynb_checkpoints
+.git
+output
+compute.yml
+azureml-logs
+azure_management
+pdm.lock
+.pdm-python
+pyproject.toml
+README.md
+datasets_info.txt
