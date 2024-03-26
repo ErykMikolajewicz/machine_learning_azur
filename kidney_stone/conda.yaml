@@ -1,0 +1,12 @@
+name: scikit_learn_training
+channels:
+  - defaults
+dependencies:
+  - python=3.11.8
+  - pip=23.3.1
+  - pip:
+    - mldesigner==0.1.0b18
+    - scikit-learn==1.4.0
+    - pandas==2.1.4
+    - mlflow==2.11.3
+    - azureml-mlflow==1.55.0
