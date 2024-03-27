@@ -4,7 +4,7 @@ from azure.ai.ml import MLClient
 from azure.identity import DefaultAzureCredential
 from azure.ai.ml import Input
 
-from pipeline import knn_pipeline
+from pipelines import knn_pipeline, lr_pipeline
 
 with open('../secrets.json') as secrets_file:
     secrets = json.load(secrets_file)
@@ -23,5 +23,7 @@ path = f'azureml://subscriptions/{SUBSCRIPTION_ID}/resourcegroups/medicinal/work
 kidney_stone_data = Input(path=path, type='uri_file')
 
 knn_job = knn_pipeline(kidney_stone_data)
-
 ml_client.jobs.create_or_update(knn_job)
+
+lr_job = lr_pipeline(kidney_stone_data)
+ml_client.jobs.create_or_update(lr_job)

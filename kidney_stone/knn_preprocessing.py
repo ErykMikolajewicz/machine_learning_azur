@@ -37,7 +37,8 @@ def split_and_scale(
     features = data.drop(['target'], axis=1)
     features_to_drop = features_to_drop.split(';')
     features = features.drop(features_to_drop, axis=1)
-    scaler.fit(features)
-    features = scaler.transform(features)
+
+    features = scaler.fit_transform(features)
     features = pd.DataFrame(features)
+    
     features.to_csv(features_path, index=False)
