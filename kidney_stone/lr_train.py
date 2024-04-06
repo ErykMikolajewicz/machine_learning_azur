@@ -5,13 +5,13 @@ from mldesigner import command_component, Input
 
 
 @command_component(
-    name="train_lr_model",
-    version="1",
-    display_name="Train lr model",
-    description="Train lr model for kidney stone dataset.",
+    name='train_lr_model',
+    version='1',
+    display_name='Train lr model',
+    description='Train lr model for kidney stone dataset.',
     environment=dict(
-        conda_file=Path(__file__).parent / "conda.yaml",
-        image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04"
+        conda_file=Path(__file__).parent / 'conda.yaml',
+        image='mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04'
     )
 )
 def lr_train(
@@ -42,8 +42,8 @@ def lr_train(
     prediction = randomized_search.predict(features)
     precision = precision_score(target, prediction)
     recall = recall_score(target, prediction)
-    metrics = {"accuracy": randomized_search.best_score_, 'precision': precision, 'recall': recall}
-    params = {"parameters": randomized_search.best_params_}
+    metrics = {'accuracy': randomized_search.best_score_, 'precision': precision, 'recall': recall}
+    params = {'parameters': randomized_search.best_params_}
 
     run_name = f'kidney_stone_lr_{datetime.now()}'
     with mlflow.start_run(run_name=run_name):

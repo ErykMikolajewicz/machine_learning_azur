@@ -5,13 +5,13 @@ from mldesigner import command_component, Input
 
 
 @command_component(
-    name="train_knn_model",
-    version="1",
-    display_name="Train knn model",
-    description="Train knn model for kidney stone dataset.",
+    name='rain_knn_model',
+    version='1',
+    display_name='Train knn model',
+    description='Train knn model for kidney stone dataset.',
     environment=dict(
-        conda_file=Path(__file__).parent / "conda.yaml",
-        image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04"
+        conda_file=Path(__file__).parent / 'conda.yaml',
+        image='mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04'
     )
 )
 def knn_train(
@@ -36,8 +36,8 @@ def knn_train(
     grid_search = GridSearchCV(knn, grid_parameters, cv=20)
     grid_search.fit(features, target)
 
-    metrics = {"accuracy": grid_search.best_score_}
-    params = {"parameters": grid_search.best_params_}
+    metrics = {'accuracy': grid_search.best_score_}
+    params = {'parameters': grid_search.best_params_}
 
     run_name = f'kidney_stone_knn_{datetime.now()}'
     with mlflow.start_run(run_name=run_name):

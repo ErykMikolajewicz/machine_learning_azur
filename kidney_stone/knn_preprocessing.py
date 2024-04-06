@@ -3,13 +3,13 @@ from pathlib import Path
 from mldesigner import command_component, Input, Output
 
 @command_component(
-    name="drop_features_and_scale",
-    version="1",
-    display_name="Drop features and scale.",
-    description="Drop unrelevant features and scale data by choosen scaler.",
+    name='drop_features_and_scale',
+    version='1',
+    display_name='Drop features and scale.',
+    description='Drop unrelevant features and scale data by choosen scaler.',
     environment=dict(
-        conda_file=Path(__file__).parent / "conda.yaml",
-        image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
+        conda_file=Path(__file__).parent / 'conda.yaml',
+        image='mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04',
     )
 )
 def split_and_scale(
