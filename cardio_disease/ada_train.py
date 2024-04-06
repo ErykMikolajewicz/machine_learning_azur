@@ -26,16 +26,17 @@ def ada_train(
 
     from sklearn.model_selection import RandomizedSearchCV
     from sklearn.ensemble import AdaBoostClassifier
+    from sklearn.tree import DecisionTreeClassifier
 
-    from scipy.stats import uniform
+    from scipy.stats import uniform, randint
 
     features = pd.read_csv(features_path, index_col=False)
     target = pd.read_csv(target_path, index_col=False).squeeze()
 
-    ada = AdaBoostClassifier(random_state=42)
+    ada = AdaBoostClassifier(random_state=42, estimator=DecisionTreeClassifier())
 
-    random_parameters = {'learning_rate': uniform(0, 10)}
-    random_search = RandomizedSearchCV(ada, random_parameters, cv=10, random_state=42)
+    random_parameters = {'learning_rate': uniform(0, 10), 'estimator__max_depth': randint(1, 11)}
+    random_search = RandomizedSearchCV(ada, random_parameters, cv=10, random_state=42, n_jobs=-1)
     random_search.fit(features, target)
 
     metrics = {'accuracy': random_search.best_score_}

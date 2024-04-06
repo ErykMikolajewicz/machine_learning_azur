@@ -32,15 +32,21 @@ def rf_train(
 
     rf = RandomForestClassifier(random_state=42, n_jobs=-1)
 
-    grid_parameters = {'criterion': ['gini', 'entropy']}
+    grid_parameters = {'criterion': ['gini', 'entropy'], 'n_estimators': [10, 30, 70, 100]}
     grid_search = GridSearchCV(rf, grid_parameters, cv=10)
     grid_search.fit(features, target)
 
     metrics = {'accuracy': grid_search.best_score_}
     params = {'parameters': grid_search.best_params_}
 
+    features_importance = pd.DataFrame(grid_search.best_estimator_.feature_importances_, index=features.columns)
+    features_importance = features_importance.sort_values(0, ascending=False)
+    axes = features_importance.plot(kind='bar', legend=False)
+    figure = axes.get_figure()
+
     run_name = f'cardio_rf_{datetime.now()}'
     with mlflow.start_run(run_name=run_name):
         mlflow.log_params(params)
         mlflow.log_metrics(metrics)
         mlflow.sklearn.log_model(sk_model=rf, registered_model_name='rf_cardio', artifact_path='rf_cardio')
+        mlflow.log_figure(figure, 'features_importance_plot.png')
